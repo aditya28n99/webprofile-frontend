@@ -2,11 +2,8 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { BsFillMenuButtonFill } from "react-icons/bs";
-import { IoLogoLinkedin } from "react-icons/io";
-import { FaEnvelopesBulk } from "react-icons/fa6";
-import { FiCodepen } from "react-icons/fi";
-import { FaGithubAlt } from "react-icons/fa6";
+
+import { BsFillMenuButtonFill, IoLogoLinkedin, FaEnvelopesBulk, FiCodepen, FaGithubAlt } from '../../imports/Icons'
 
 import styled from "styled-components";
 
