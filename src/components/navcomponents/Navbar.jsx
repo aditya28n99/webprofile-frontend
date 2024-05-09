@@ -1,0 +1,85 @@
+import React from 'react'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { BsFillMenuButtonFill } from "react-icons/bs";
+import { IoLogoLinkedin } from "react-icons/io";
+import { FaEnvelopesBulk } from "react-icons/fa6";
+import { FiCodepen } from "react-icons/fi";
+import { FaGithubAlt } from "react-icons/fa6";
+
+import styled from "styled-components";
+
+const Navwrapper = styled(Navbar)`
+width: 80%;
+margin: auto;
+margin-top: 10px;
+border-radius: 20px;
+box-shadow: 0px 0px 50px 15px lightblue;
+`
+const CustomNavbarToggle = styled(Navbar.Toggle)`
+border: none;
+background-color: transparent;
+justify-self: end;
+&:focus {
+    outline: none;
+    box-shadow: none;
+    color: black;
+}
+`;
+const NavContainer = styled(Container)`
+  /* border: 1px solid red; */
+`
+const NavlinkWrapper = styled(Nav)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; 
+  & > * {
+    font-size: 20px;
+    padding: 10px;
+  }
+  @media screen and (max-width: 992px) {
+  position: absolute;
+  left: 10;
+  top: 0;
+}
+`
+
+const NavLink = styled(Nav.Link)`
+  &&{
+    text-decoration: none;
+    color: gray !important;
+  }
+  &&:hover, &&:focus{
+    color: black !important;
+    text-shadow: 0.1px 0.1px 1px black;
+  }
+`
+export default function Navbarcomp() {
+
+  return (
+    <Navwrapper expand="lg" className="bg-body-tertiary">
+      <NavContainer>
+        <Navbar.Brand href="#home"></Navbar.Brand>
+        <CustomNavbarToggle aria-controls="basic-navbar-nav"><BsFillMenuButtonFill />
+        </CustomNavbarToggle>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <NavLink href="#">Home</NavLink>
+            <NavLink href="#">Blogs</NavLink>
+            <NavLink href="#">Projects</NavLink>
+            <NavLink href="#">Certificates</NavLink>
+            <NavLink href="#">About</NavLink>
+          </Nav>
+        </Navbar.Collapse>
+        <NavlinkWrapper>
+            <NavLink href="mailto:adityawakale208@gmail.com"><FaEnvelopesBulk /></NavLink>
+            <NavLink href="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank"><IoLogoLinkedin/></NavLink>
+            <NavLink href="https://codepen.io/Swamfire" target="_blank"><FiCodepen /></NavLink>
+            <NavLink href="https://github.com/aditya28n99?tab=repositories" target="_blank"><FaGithubAlt /></NavLink>
+          </NavlinkWrapper>
+      </NavContainer>
+    </Navwrapper>
+  )
+}
+

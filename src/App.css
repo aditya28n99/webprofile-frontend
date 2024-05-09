@@ -1,5 +1,7 @@
 body{
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
+  background-image: linear-gradient(rgb(218, 249, 252), transparent);
 }
