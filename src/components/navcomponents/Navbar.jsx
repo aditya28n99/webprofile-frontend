@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -41,11 +43,11 @@ const NavlinkWrapper = styled(Nav)`
   top: 0;
 }
 `
-
-const NavLink = styled(Nav.Link)`
+const NavLink = styled(Link)`
   &&{
     text-decoration: none;
     color: gray !important;
+    padding: 10px;
   }
   &&:hover, &&:focus{
     color: black !important;
@@ -61,19 +63,19 @@ export default function Navbarcomp() {
         <CustomNavbarToggle aria-controls="basic-navbar-nav"><BsFillMenuButtonFill />
         </CustomNavbarToggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink href="#">Home</NavLink>
-            <NavLink href="#">Blogs</NavLink>
-            <NavLink href="#">Projects</NavLink>
-            <NavLink href="#">Certificates</NavLink>
-            <NavLink href="#">About</NavLink>
-          </Nav>
-        </Navbar.Collapse>
+  <Nav className="me-auto">
+    <NavLink to="/home">Home</NavLink>
+    <NavLink to="/blogs">Blogs</NavLink>
+    <NavLink to="/projects">Projects</NavLink>
+    <NavLink to="/achivements">Achivements</NavLink>
+    <NavLink to="/about">About</NavLink>
+  </Nav>
+</Navbar.Collapse>
         <NavlinkWrapper>
-            <NavLink href="mailto:adityawakale208@gmail.com"><FaEnvelopesBulk /></NavLink>
-            <NavLink href="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank"><IoLogoLinkedin/></NavLink>
-            <NavLink href="https://codepen.io/Swamfire" target="_blank"><FiCodepen /></NavLink>
-            <NavLink href="https://github.com/aditya28n99?tab=repositories" target="_blank"><FaGithubAlt /></NavLink>
+            <NavLink to="mailto:adityawakale208@gmail.com"><FaEnvelopesBulk /></NavLink>
+            <NavLink to="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank"><IoLogoLinkedin/></NavLink>
+            <NavLink to="https://codepen.io/Swamfire" target="_blank"><FiCodepen /></NavLink>
+            <NavLink to="https://github.com/aditya28n99?tab=repositories" target="_blank"><FaGithubAlt /></NavLink>
           </NavlinkWrapper>
       </NavContainer>
     </Navwrapper>
