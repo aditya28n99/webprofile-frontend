@@ -64,7 +64,7 @@ export default function Navbarcomp() {
         </CustomNavbarToggle>
         <Navbar.Collapse id="basic-navbar-nav">
   <Nav className="me-auto">
-    <NavLink to="/home">Home</NavLink>
+    <NavLink to="/">Home</NavLink>
     <NavLink to="/blogs">Blogs</NavLink>
     <NavLink to="/projects">Projects</NavLink>
     <NavLink to="/achivements">Achivements</NavLink>

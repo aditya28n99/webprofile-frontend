@@ -2,6 +2,6 @@ body{
   height: 100vh;
   margin: 0;
   padding: 0;
-  /* background-color: aliceblue; */
-  background-image: linear-gradient(rgb(218, 249, 252), transparent);
+  background-image: linear-gradient(to right, #ff8a00, #e52e71); /* Add a gradient background */
+  color: #fff; /* Set text color to white */
 }
