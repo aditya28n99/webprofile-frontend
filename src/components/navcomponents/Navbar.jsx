@@ -15,6 +15,9 @@ margin: auto;
 margin-top: 10px;
 border-radius: 20px;
 box-shadow: 0px 0px 50px 15px lightblue;
+position: sticky;
+top: 10px;
+z-index: 3;
 `
 const CustomNavbarToggle = styled(Navbar.Toggle)`
 border: none;
@@ -63,20 +66,20 @@ export default function Navbarcomp() {
         <CustomNavbarToggle aria-controls="basic-navbar-nav"><BsFillMenuButtonFill />
         </CustomNavbarToggle>
         <Navbar.Collapse id="basic-navbar-nav">
-  <Nav className="me-auto">
-    <NavLink to="/">Home</NavLink>
-    <NavLink to="/blogs">Blogs</NavLink>
-    <NavLink to="/projects">Projects</NavLink>
-    <NavLink to="/achivements">Achivements</NavLink>
-    <NavLink to="/about">About</NavLink>
-  </Nav>
-</Navbar.Collapse>
+          <Nav className="me-auto">
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/blogs">Blogs</NavLink>
+            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/achivements">Achivements</NavLink>
+            <NavLink to="/about">About</NavLink>
+          </Nav>
+        </Navbar.Collapse>
         <NavlinkWrapper>
-            <NavLink to="mailto:adityawakale208@gmail.com"><FaEnvelopesBulk /></NavLink>
-            <NavLink to="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank"><IoLogoLinkedin/></NavLink>
-            <NavLink to="https://codepen.io/Swamfire" target="_blank"><FiCodepen /></NavLink>
-            <NavLink to="https://github.com/aditya28n99?tab=repositories" target="_blank"><FaGithubAlt /></NavLink>
-          </NavlinkWrapper>
+          <NavLink to="mailto:adityawakale208@gmail.com"><FaEnvelopesBulk /></NavLink>
+          <NavLink to="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank"><IoLogoLinkedin /></NavLink>
+          <NavLink to="https://codepen.io/Swamfire" target="_blank"><FiCodepen /></NavLink>
+          <NavLink to="https://github.com/aditya28n99?tab=repositories" target="_blank"><FaGithubAlt /></NavLink>
+        </NavlinkWrapper>
       </NavContainer>
     </Navwrapper>
   )

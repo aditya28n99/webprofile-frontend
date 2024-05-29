@@ -11,8 +11,10 @@ const blogPosts = [
 ];
 
 const CarouselContainer = styled.div`
-  padding: 50px;
-  overflow: hidden;
+  padding: 10px;
+  overflow: scroll;
+  scrollbar-width: none;
+  height: 250px;
 `;
 
 const CarouselWrapper = styled.div`
@@ -33,7 +35,7 @@ const generateRandomGradient = () => {
 };
 
 const Card = styled.div`
-  position: relative;
+  /* position: relative; */
   width: 250px; /* Fixed width for card */
   height: 150px;
   margin: 0 5px; /* Adjust margin to create spacing between cards */
@@ -48,17 +50,31 @@ const Card = styled.div`
   }
 
   &:nth-child(1) {
-    transform: translate(100%, -30%) skew(-20deg);
+    transform: translate(90%, 10%) skew(-20deg);
     z-index: 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.5 ease;
   }
 
   &:nth-child(2) {
-    transform: translate(-50%, 30%) skew(-20deg);
+    transform: translate(-90%, 50%) skew(-20deg);
     z-index: 1;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.5 ease;
+  }
+
+  @media (max-width: 768px) {
+    &:nth-child(1) {
+      transform: translate(10%, 10%) skew(-20deg);
+      min-width: 250px;
+      overflow: visible;
+  }
+
+  &:nth-child(2) {
+    transform: translate(-80%, 50%) skew(-20deg);
+    min-width: 250px;
+    overflow: visible;
+  }
   }
 `;
 

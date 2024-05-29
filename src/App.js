@@ -18,7 +18,7 @@ function App() {
     <>
       <Router>
         <Navbarcomp />
-        {/* <Intro/> */}
+        <Intro/>
         <Routes>
           <Route path='/' Component={ProjectDetails} />
           <Route path='/blogs' Component={Blogs} />
