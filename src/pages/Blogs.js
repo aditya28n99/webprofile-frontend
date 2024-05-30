@@ -5,4 +5,3 @@ export default function Blogs() {
     <div>Blogs</div>
   )
 }
-

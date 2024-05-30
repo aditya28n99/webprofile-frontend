@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-// Example blog post data
-const blogPosts = [
-  { id: 1, title: 'Blog Post 1', content: 'Content of Blog Post 1' },
-  { id: 2, title: 'Blog Post 2', content: 'Content of Blog Post 2' },
-  { id: 3, title: 'Blog Post 3', content: 'Content of Blog Post 3' },
-  { id: 4, title: 'Blog Post 4', content: 'Content of Blog Post 4' },
-  { id: 5, title: 'Blog Post 5', content: 'Content of Blog Post 5' }
-];
+import axios from 'axios';
 
 const CarouselContainer = styled.div`
   padding: 10px;
   overflow: scroll;
   scrollbar-width: none;
   height: 250px;
+  position: relative;
 `;
 
 const CarouselWrapper = styled.div`
-    display: flex;
+  display: flex;
   transition: transform 0.5s ease;
-  margin: 0 -5px; /* Adjust margin to account for card spacing */
-
+  will-change: transform;
 `;
 
-// Function to generate a random gradient color
 const generateRandomGradient = () => {
   const randomColor1 = Math.floor(Math.random() * 256);
   const randomColor2 = Math.floor(Math.random() * 256);
@@ -35,70 +26,87 @@ const generateRandomGradient = () => {
 };
 
 const Card = styled.div`
-  /* position: relative; */
-  width: 250px; /* Fixed width for card */
+  width: 250px;
   height: 150px;
-  margin: 0 5px; /* Adjust margin to create spacing between cards */
+  margin: 0 5px;
   background: linear-gradient(to right, #ff6b6b, #ffc371);
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.5s ease;
+  background-size: cover;
 
   &:hover {
     transform: scale(1.05);
   }
-
   &:nth-child(1) {
     transform: translate(90%, 10%) skew(-20deg);
     z-index: 0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.5 ease;
   }
-
   &:nth-child(2) {
     transform: translate(-90%, 50%) skew(-20deg);
     z-index: 1;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: transform 0.5 ease;
   }
-
-  @media (max-width: 768px) {
+  @media (max-width: 468px) {
     &:nth-child(1) {
-      transform: translate(10%, 10%) skew(-20deg);
+      transform: translate(23%, 10%) skew(-20deg);
       min-width: 250px;
       overflow: visible;
   }
 
   &:nth-child(2) {
-    transform: translate(-80%, 50%) skew(-20deg);
+    transform: translate(-98%, 50%) skew(-20deg);
     min-width: 250px;
     overflow: visible;
   }
   }
+
 `;
 
-
-const Carousel = () => {
+const ProjectCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/projects')
+      .then(response => {
+        setProjects(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching projects in carousel:', error);
+      });
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
-        prevIndex === blogPosts.length - 2 ? 0 : prevIndex + 1
+        prevIndex >= projects.length - 2 ? 0 : prevIndex + 1
       );
-    }, 1000); // Change slide every 3 seconds
+    }, 2000); // Change slide every 3 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [projects.length]);
+
+  const visibleProjects = [];
+  if (projects.length > 1) {
+    visibleProjects.push(projects[currentIndex]);
+    visibleProjects.push(projects[(currentIndex + 1) % projects.length]);
+  } else {
+    visibleProjects.push(...projects);
+  }
 
   return (
     <CarouselContainer>
       <CarouselWrapper>
-        {[...blogPosts, ...blogPosts].slice(currentIndex, currentIndex + 2).map((post, index) => (
-          <Card key={index} style={{ background: generateRandomGradient() }}>
-            <h3>{post.title}</h3>
-            <p>{post.content}</p>
+        {visibleProjects.map((project) => (
+          // backgroundImage: `url(${project.image_url})` style for adding bg images
+          <Card key={visibleProjects.id} style={{ background: generateRandomGradient() }}>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
           </Card>
         ))}
       </CarouselWrapper>
@@ -106,4 +114,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default ProjectCarousel;

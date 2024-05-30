@@ -1,28 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Carousel from './Carousel';
+import Carousel from '../projectsComponents/ProjectCarousel';
 
 const IntroSection = styled.section`
-border: 1px solid black;
   padding: 40px 0;
-  background-image: linear-gradient(to right, #ff8a00, #e52e71); /* Add a gradient background */
   color: #fff; /* Set text color to white */
 `;
 
 const IntroContent = styled.div`
   max-width: 600px;
-  border: 1px solid red;
   padding: 10px;
 `;
 const IntroWrapper = styled.div`
   /* max-width: 600px; */
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
   margin: 10px;
   padding: 10px;
-  /* justify-content: center; */
   justify-content: space-around;
 `;
 
@@ -59,7 +54,7 @@ export default function Intro() {
             <div className="col-md-6"> */}
             <IntroWrapper>
               <IntroContent>
-                <Name>Hello, I'm Aditya Wakale</Name>
+                <Name>Hello, I'm Dev</Name>
                 <Designation>Passionate MERN Stack Developer</Designation>
                 <p>Welcome to my digital playground where I bring ideas to life!</p>
                 <StyledButton to="/projects">View My Work</StyledButton>
