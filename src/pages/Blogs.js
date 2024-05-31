@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BlogCard from '../components/blogsComponents/BlogCard.jsx';
 import styled from 'styled-components';
+import Loader from '../components/profileComponents/Loader.jsx';
+import ErrorAlert from '../components/profileComponents/ErrorAlert.jsx';
 
   /* Css for Blogs cards */
   const BlogsPage = styled.div`
@@ -36,9 +38,9 @@ const Blogs = () => {
     <BlogsPage className="Blogs-page">
   <h1>My Blogs</h1>
   {loading ? (
-    <p>Loading...</p>
+    <Loader/>
   ) : error ? (
-    <p>Error fetching project details: {error.message}</p>
+    <ErrorAlert error={error}/>
   ) : (
     <BlogsList className="Blogs-list">
       {blogs.map(blog => (

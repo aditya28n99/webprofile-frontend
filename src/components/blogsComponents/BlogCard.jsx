@@ -1,7 +1,10 @@
 // frontend/src/components/blogsComponents/BlogCard.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import GlobalStyle from '../../imports/GlobalStyle';
+
 
 const Card = styled.div`
   border: 1px solid #ddd;

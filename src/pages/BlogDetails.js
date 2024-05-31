@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { FaThumbsUp, FaComments, FaEdit } from 'react-icons/fa';
+import {AiTwotoneLike, AiOutlineComment, BiSolidMessageRoundedEdit} from '../imports/Icons'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import '../imports/fonts.css'
+import Loader from '../components/profileComponents/Loader';
+
 
 const BlogContainer = styled.div`
-  max-width: 800px;
+  max-width: 1400px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd;  
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); */
 `;
 
 const BlogImage = styled.img`
@@ -22,6 +25,7 @@ const BlogTitle = styled.h1`
   margin-top: 20px;
   font-size: 2em;
   text-align: center;
+  font-family: "Edu TAS Beginner", cursive;
 `;
 
 const BlogMeta = styled.div`
@@ -29,28 +33,30 @@ const BlogMeta = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
+  font-family: "Caveat", cursive;
+
 `;
 
 const BlogIcons = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  font-size: larger;
 `;
 
 const BlogDescription = styled.p`
   margin-top: 20px;
   font-size: 1.2em;
   line-height: 1.6;
+  font-family: "Sedan SC", serif;
+
 `;
+
+
+// new styles
 
 const CommentSection = styled.div`
-  margin-top: 20px;
-`;
-
-const CommentInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
+  margin: 20px;
 `;
 
 const CommentList = styled.ul`
@@ -59,22 +65,100 @@ const CommentList = styled.ul`
 `;
 
 const CommentItem = styled.li`
-  margin: 10px 0;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-`;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 
-const CommentAuthor = styled.span`
-  display: block;
-  font-size: 0.9em;
-  color: #666;
+  p {
+    font-size: 0.9em; /* Smaller font for comments */
+    margin: 0;
+    flex-grow: 1;
+  }
 `;
 
 const EditComment = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+
+  input {
+    flex-grow: 1;
+    margin-right: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    padding: 5px;
+  }
+
+  button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
 `;
+
+const CommentAuthor = styled.span`
+  font-size: 0.8em;
+  font-weight: lighter;
+  color: white;
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+
+  &::before {
+    content: '~ ';
+  }
+`;
+
+const CommentInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+
+  input {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    padding: 10px;
+    font-size: 1em;
+    transition: filter 0.3s ease;
+
+    &::placeholder {
+      color: gainsboro;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    align-self: flex-end;
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+`;
+
+const Gap = styled.div`
+width: 20px;
+`
 
 const BlogDetails = () => {
   const { postId } = useParams();
@@ -168,7 +252,7 @@ const BlogDetails = () => {
   };
 
   if (!blogData) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   return (
@@ -178,60 +262,61 @@ const BlogDetails = () => {
       <BlogMeta>
         <BlogIcons>
           <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: 'red' }}>
-            <FaThumbsUp /> {blogData.likes}
+            <AiTwotoneLike /> {blogData.likes}
           </div>
           <div onClick={handleCommentIconClick} style={{ cursor: 'pointer' }}>
-            <FaComments /> {blogData.comments?.length || 0}
+            <AiOutlineComment /> {blogData.comments?.length || 0}
           </div>
         </BlogIcons>
         <div>Published on - {new Date(blogData.date).toLocaleDateString()}</div>
       </BlogMeta>
       <BlogDescription>{blogData.content}</BlogDescription>
       <CommentSection ref={commentSectionRef}>
-        <h2>Comments</h2>
-        <CommentList>
-          {blogData.comments?.map(comment => (
-            <CommentItem key={comment.id}>
-              {editComment === comment.id ? (
-                <EditComment>
-                  <input
-                    type="text"
-                    value={editedText}
-                    onChange={(e) => setEditedText(e.target.value)}
-                  />
-                  <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
-                </EditComment>
-              ) : (
-                <>
-                  <p>{comment.comment}</p>
-                  <CommentAuthor>{comment.user_name}</CommentAuthor>
-                  <FaEdit
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => handleEditComment(comment.id, comment.comment)}
-                  />
-                </>
-              )}
-            </CommentItem>
-          ))}
-        </CommentList>
-        <CommentInput>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            placeholder="Your name"
-            required
-          />
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add a comment"
-            required
-          />
-          <button onClick={handleAddComment}>Post Comment</button>
-        </CommentInput>
-      </CommentSection>
+  <h2 style={{fontFamily: '"Edu TAS Beginner", cursive'}}>Comments</h2>
+  <CommentList>
+    {blogData.comments?.map(comment => (
+      <CommentItem key={comment.id}>
+        {editComment === comment.id ? (
+          <EditComment>
+            <input
+              type="text"
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
+            />
+            <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
+          </EditComment>
+        ) : (
+          <>
+            <p>{comment.comment}</p>
+            <CommentAuthor>{comment.user_name}</CommentAuthor>
+            <Gap></Gap>
+            <BiSolidMessageRoundedEdit
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleEditComment(comment.id, comment.comment)}
+            />
+          </>
+        )}
+      </CommentItem>
+    ))}
+  </CommentList>
+  <CommentInput>
+    <input
+      type="text"
+      value={userName}
+      onChange={(e) => setUserName(e.target.value)}
+      placeholder="Your name"
+      required
+    />
+    <input
+      type="text"
+      value={newComment}
+      onChange={(e) => setNewComment(e.target.value)}
+      placeholder="Add a comment"
+      required
+    />
+    <button onClick={handleAddComment}>Post Comment</button>
+  </CommentInput>
+</CommentSection>
     </BlogContainer>
   );
 };
