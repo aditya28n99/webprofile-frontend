@@ -103,10 +103,10 @@ const ProjectCarousel = () => {
     <CarouselContainer>
       <CarouselWrapper>
         {visibleProjects.map((project) => (
-          // backgroundImage: `url(${project.image_url})` style for adding bg images
-          <Card key={visibleProjects.id} style={{ background: generateRandomGradient() }}>
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
+          // backgroundImage: `url(${project.image_url})` or background: generateRandomGradient() style for adding bg images
+          <Card key={visibleProjects.id} style={{ backgroundImage: `url(${project.image_url})`? `url(${project.image_url})`: generateRandomGradient() }}>
+            {/* <h3>{project.title}</h3>
+            <p>{project.description}</p> */}
           </Card>
         ))}
       </CarouselWrapper>
