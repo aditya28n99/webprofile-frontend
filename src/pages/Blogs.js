@@ -4,11 +4,11 @@ import axios from 'axios';
 import BlogCard from '../components/blogsComponents/BlogCard.jsx';
 import styled from 'styled-components';
 
-  /* Css for projects cards */
-  const ProjectsPage = styled.div`
+  /* Css for Blogs cards */
+  const BlogsPage = styled.div`
   padding: 30px;` 
   
-  const ProjectsList = styled.div`
+  const BlogsList = styled.div`
   display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -26,27 +26,27 @@ const Blogs = () => {
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching projects:', error);
+        console.error('Error fetching Blogs:', error);
         setError(error);
         setLoading(false);
       });
   }, []);
 
   return (
-    <ProjectsPage className="projects-page">
+    <BlogsPage className="Blogs-page">
   <h1>My Blogs</h1>
   {loading ? (
     <p>Loading...</p>
   ) : error ? (
     <p>Error fetching project details: {error.message}</p>
   ) : (
-    <ProjectsList className="projects-list">
+    <BlogsList className="Blogs-list">
       {blogs.map(blog => (
         <BlogCard key={blog.id} blog={blog} />
       ))}
-    </ProjectsList>
+    </BlogsList>
   )}
-</ProjectsPage>
+</BlogsPage>
 
   );  
 };
