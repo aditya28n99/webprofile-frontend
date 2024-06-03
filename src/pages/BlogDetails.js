@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {AiTwotoneLike, AiOutlineComment, BiSolidMessageRoundedEdit} from '../imports/Icons'
+import { GoHeartFill } from "react-icons/go";
+
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../imports/fonts.css'
@@ -172,6 +174,10 @@ const BlogDetails = () => {
   const [editedText, setEditedText] = useState('');
   const commentSectionRef = useRef(null);
 
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCounts, setLikeCounts] = useState(0)
+
+
   useEffect(() => {
     // Fetch blog post and comments from the server
     axios.get(`http://localhost:5000/blogs/${postId}`)
@@ -195,17 +201,38 @@ const BlogDetails = () => {
       });
   }, [postId]);
 
+  
   const handleLikeClick = () => {
-    axios.post(`http://localhost:5000/blogs/${postId}/likes`)
-      .then(response => {
-        setBlogData(prevData => ({
-          ...prevData,
-          likes: response.data.like_count,
-        }));
-      })
-      .catch(error => {
-        console.error('Error updating likes:', error);
-      });
+    if (isLiked) {
+      // Remove like
+      axios.delete(`http://localhost:5000/blogs/${postId}/likes`)
+        .then(() => {
+          setBlogData(prevData => ({
+            ...prevData,
+            likes: prevData.likes - 1,
+            
+          }));
+          setIsLiked(false);
+          setLikeCounts(0); 
+        })
+        .catch(error => {
+          console.error('Error removing like:', error);
+        });
+    } else {
+      // Add like
+      axios.post(`http://localhost:5000/blogs/${postId}/likes`)
+        .then(() => {
+          setBlogData(prevData => ({
+            ...prevData,
+            likes: prevData.likes + 1,
+          }));
+          setIsLiked(true);
+          setLikeCounts(1);
+        })
+        .catch(error => {
+          console.error('Error adding like:', error);
+        });
+    }
   };
 
   const handleAddComment = () => {
@@ -261,9 +288,9 @@ const BlogDetails = () => {
       <BlogTitle>{blogData.title}</BlogTitle>
       <BlogMeta>
         <BlogIcons>
-          <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: 'red' }}>
-            <AiTwotoneLike /> {blogData.likes}
-          </div>
+        <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: isLiked ? 'red' : 'white' }}>
+  <GoHeartFill/>
+</div>
           <div onClick={handleCommentIconClick} style={{ cursor: 'pointer' }}>
             <AiOutlineComment /> {blogData.comments?.length || 0}
           </div>
