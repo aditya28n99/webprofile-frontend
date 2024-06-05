@@ -1,12 +1,12 @@
 import React from 'react'
 import Intro from '../components/profileComponents/Intro'
-import Loader from '../components/profileComponents/Loader'
+import TempletBlogs from '../components/profileComponents/TempletBlogs'
 
 export default function Home() {
   return (
     <>
     <Intro></Intro>
-    <Loader></Loader>
+    <TempletBlogs></TempletBlogs>
     </>
   )
 }

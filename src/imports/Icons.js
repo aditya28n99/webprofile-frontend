@@ -6,9 +6,11 @@ import { FaGithubAlt } from "react-icons/fa6";
 import { AiTwotoneLike } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
 import { BiSolidMessageRoundedEdit } from "react-icons/bi";
+import { PiArrowFatLinesLeftLight, PiArrowFatLinesRightLight } from "react-icons/pi";
 
 
 
 
-export { BsFillMenuButtonFill, IoLogoLinkedin, FaEnvelopesBulk, FiCodepen, FaGithubAlt,AiTwotoneLike, AiOutlineComment, BiSolidMessageRoundedEdit };
+
+export { BsFillMenuButtonFill, IoLogoLinkedin, FaEnvelopesBulk, FiCodepen, FaGithubAlt,AiTwotoneLike, AiOutlineComment, BiSolidMessageRoundedEdit, PiArrowFatLinesLeftLight, PiArrowFatLinesRightLight };
 
