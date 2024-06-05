@@ -10,7 +10,6 @@ const ProjectCardContainer = styled.div`
   max-width: 500px;
   margin: 10px auto;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -23,7 +22,6 @@ const ProjectImg = styled.img`
   object-fit: cover;
   border: 10px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const ProjectDetails = styled.div`

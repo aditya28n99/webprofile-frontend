@@ -34,7 +34,7 @@ const Background = styled.div`
 const ProjectInfo = styled.div`
   width: 60%;
   color: white;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
   margin: 20px;
@@ -49,7 +49,7 @@ const CarouselContainer = styled.div`
   max-width: 600px;
   margin: 20px auto;
   position: relative;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   @media (max-width: 768px) {
     width: 90%;
