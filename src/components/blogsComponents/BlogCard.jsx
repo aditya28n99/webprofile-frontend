@@ -12,8 +12,8 @@ const CardWrapper = styled.div`
 const Card = styled.div`
   color: inherit;
   cursor: pointer;
-  width: 250px;
-  height: 400px;
+  width: 300px;
+  height: 450px;
   border-radius: 8px;
   position: relative;
   transform-style: preserve-3d;

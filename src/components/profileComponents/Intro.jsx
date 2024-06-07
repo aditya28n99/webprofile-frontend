@@ -3,24 +3,26 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Carousel from '../projectsComponents/ProjectCarousel';
 
-const IntroSection = styled.section`
-  padding: 40px 0;
-  color: #fff; /* Set text color to white */
-`;
+// https://codepen.io/noirsociety/pen/ZEwLGXB
 
-const IntroContent = styled.div`
-  max-width: 600px;
-  padding: 10px;
-`;
 const IntroWrapper = styled.div`
   /* max-width: 600px; */
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
   margin: 10px;
-  padding: 10px;
   justify-content: space-around;
-`;
+  /* border: 2px solid black; */
+  `;
 
+  const IntroContent = styled.div`
+    max-width: 600px;
+    padding: 40px;
+    margin: 20px;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    /* background: rgba(0, 0, 0, 0.1); */
+
+  `;
 const Name = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 10px;
@@ -31,24 +33,27 @@ const Designation = styled.p`
   margin-bottom: 20px;
 `;
 
-const StyledButton = styled(Link)`
+const StyledButton = styled.div`
+width: max-content;
+  margin: 30px 0;
+`;
+const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 10px;
-  background-color: #3498db;
   color: #fff;
   border-radius: 5px;
+  border: 2px solid whitesmoke;
   transition: background-color 0.3s ease;
 
   &:hover {
     background-color: #ff8a00;
-    border: 2.5px solid #e52e71;
   }
 `;
 
 export default function Intro() {
   return (
     <>
-      <IntroSection>
+      {/* <IntroSection> */}
         {/* <div className="container">
             <div className="row">
             <div className="col-md-6"> */}
@@ -57,14 +62,17 @@ export default function Intro() {
                 <Name>Hello, I'm Dev</Name>
                 <Designation>Passionate MERN Stack Developer</Designation>
                 <p>Welcome to my digital playground where I bring ideas to life!</p>
-                <StyledButton to="/projects">View My Work</StyledButton>
+                <StyledButton>
+
+                <StyledLink to="/projects">View My Work</StyledLink>
+                </StyledButton>
               </IntroContent>
-            <Carousel/>
+              <Carousel/>
             </IntroWrapper>
             {/* </div>
           </div>
         </div> */}
-      </IntroSection>
+      {/* </IntroSection> */}
     </>
   );
 }

@@ -15,11 +15,11 @@ const NavWrapper = styled(Navbar)`
   margin: auto;
   margin-top: 10px;
   border-radius: 20px;
-  box-shadow: 0px 0px 50px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 15px 5px rgba(243, 69, 69, 0.7);
   position: sticky;
   top: 10px;
   z-index: 3;
-  background: rgba(255, 255, 255, 0.386);
+  background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
 `;
 
@@ -52,7 +52,7 @@ const NavLinkWrapper = styled(Nav)`
 
 const CustomNavLink = styled(Link)`
   text-decoration: none;
-  color: gray !important;
+  color: wheat !important;
   padding: 10px;
   font-family: "Averia Serif Libre", serif;
 
