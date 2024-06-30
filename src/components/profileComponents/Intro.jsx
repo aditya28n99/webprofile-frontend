@@ -5,19 +5,11 @@ import Carousel from '../projectsComponents/ProjectCarousel';
 
 const IntroWrapper = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
   flex-wrap: wrap;
-  margin: 10px auto;
-  /* border: 2px solid black; */
   box-sizing: border-box;
   justify-content: space-between;
-  @media (max-width: 468px) {
-    width: 100%;
-  }
-  @media (max-width: 1080px) {
-    width: 100%;
-    justify-content: center;
-  }
+ 
 `;
 
 const IntroContent = styled.div`
@@ -25,7 +17,6 @@ const IntroContent = styled.div`
   max-width: 600px;
   padding: 40px;
   margin: 20px;
-  /* border: 2px solid black; */
   border-radius: 10px;
   @media (max-width: 768px) {
     flex: 1 100%;
