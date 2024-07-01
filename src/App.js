@@ -23,7 +23,7 @@ function App() {
           <Route path='/' Component={Home} />
           <Route path='/projects' Component={Projects} />
           <Route path='/projects/:id' element={<ProjectDetails />}/>
-          <Route path='/achivements' Component={Achivements} />
+          <Route path='/achievements' Component={Achivements} />
           <Route path='/blogs' Component={Blogs}/> 
           <Route path='/blogs/:postId' element={<BlogDetails/>}/> {/* Pass postId as a prop if needed in elements */}
         </Routes>

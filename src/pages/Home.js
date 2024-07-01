@@ -4,6 +4,8 @@ import Intro from '../components/profileComponents/Intro'
 import BlogCarousel from '../components/blogsComponents/BlogCarousel'
 import About from './About'
 import Contact from '../components/profileComponents/contact';
+import Scrollbtn from '../components/profileComponents/ScrollBtn';
+import Footer from '../components/profileComponents/Footer';
 
 const Wrapper = styled.div`
   display: flex;
@@ -29,6 +31,8 @@ export default function Home() {
     <About></About>
     <Contact></Contact>
     </Wrapper>
+    <Footer></Footer>
+    <Scrollbtn></Scrollbtn>
     </>
   )
 }
