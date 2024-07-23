@@ -12,20 +12,22 @@ const BlogCarousel = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBlogsData = async () =>{
-      try{
+    const fetchBlogsData = async () => {
+      try {
         const APIData = await getAllBlogs();
-        const blogsData = APIData.map((blog)=>({
+        const blogsData = APIData.map((blog) => ({
           id: blog.id,
           title: blog.title,
-          description: blog.content.substring(0, 4000)
-        }))
+          subtitle: blog.subtitle,
+          imageUrl: blog.image_url,
+          content: blog.content.substring(0, 190),
+        }));
         setBlogs(blogsData);
-      }catch(error){
-        console.log('error '+ error);
+      } catch (error) {
+        console.log('error ' + error);
         setError('Error loading blog data');
       }
-    }
+    };
     fetchBlogsData();
   }, []);
 
@@ -46,11 +48,18 @@ const BlogCarousel = () => {
           {blogs.map((blog) => (
             <Carousel.Item key={blog.id}>
               <BlogItem>
-                <Title>{blog.title}</Title>
-                <Para>{blog.description}</Para>
-                <CarouselButton variant="outline-light" size="sm" onClick={() => handleReadMore(blog.id)}>
-                  Read More
-                </CarouselButton>
+                <ImageContainer>
+                  <BlogImage src={blog.imageUrl} alt={blog.title} />
+                </ImageContainer>
+                <ContentContainer>
+                  <Title>{blog.title}</Title>
+                  <Subtitle>{blog.subtitle}</Subtitle>
+                  <Para dangerouslySetInnerHTML={{ __html: blog.content }}></Para>
+                  <Date>{blog.date}</Date>
+                  <CarouselButton variant="outline-light" size="sm" onClick={() => handleReadMore(blog.id)}>
+                    Read More
+                  </CarouselButton>
+                </ContentContainer>
               </BlogItem>
             </Carousel.Item>
           ))}
@@ -75,24 +84,66 @@ const BlogCarouselContainer = styled.div`
 `;
 
 const BlogItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 0 15px;
   min-height: 300px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+
+const ImageContainer = styled.div`
+  flex: 1;
+  padding: 10px;
+
+  @media (max-width: 868px) {
+    display: none;
+    border: 2px solid red;
+  }
+`;
+
+const BlogImage = styled.img`
+  width: 100%;
+  max-height: 250px; /* Set a max height for better control */
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 20px; /* Add some space below the image */
+`;
+
+
+const ContentContainer = styled.div`
+  flex: 2;
+  padding: 10px;
 `;
 
 const Title = styled.h1`
-  font-family: "Anton SC", sans-serif;
+  font-family: 'Anton SC', sans-serif;
   color: whitesmoke;
   text-shadow: 2px 2px 4px rgba(243, 203, 3, 0.516);
-  &:hover {
+`;
 
-}
+const Subtitle = styled.h2`
+  font-family: 'Shantell Sans', cursive;
+  color: goldenrod;
+  font-size: 1.2rem;
 `;
 
 const Para = styled.p`
   color: whitesmoke;
-  font-family: "Gideon Roman", serif;
+  font-family: 'Gideon Roman', serif;
   font-size: 18px;
   font-weight: 500;
+`;
+
+const Date = styled.p`
+  color: lightgray;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9rem;
 `;
 
 const CarouselButton = styled(Button)`
@@ -102,7 +153,7 @@ const CarouselButton = styled(Button)`
   border-radius: 5px;
   border: 2px solid whitesmoke;
   transition: background-color 0.3s ease;
-  font-family: "Shantell Sans", cursive;
+  font-family: 'Shantell Sans', cursive;
   font-size: 1rem;
   &:hover {
     background-color: goldenrod;

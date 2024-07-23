@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {AiOutlineComment, BiSolidMessageRoundedEdit, GoHeartFill} from '../imports/Icons'
-import '../imports/fonts.css'
+import { AiOutlineComment, BiSolidMessageRoundedEdit, GoHeartFill } from '../imports/Icons';
+import '../imports/fonts.css';
 import Loader from '../components/profileComponents/Loader';
 import { deletBlogLikes, getBlogById, getBlogComments, addCommentToBlog, updateCommentOnBlog } from '../services/blogService';
 
@@ -19,54 +19,53 @@ const BlogDetails = () => {
   const commentSectionRef = useRef(null);
 
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCounts, setLikeCounts] = useState(0)
+  const [likeCounts, setLikeCounts] = useState(0);
 
   useEffect(() => {
     // Fetch blog post and comments from the server
-    const fetchBlogByID = async() => {
-      try{
+    const fetchBlogByID = async () => {
+      try {
         const data = await getBlogById(postId);
         setBlogData(data);
-      }catch(error){
+      } catch (error) {
         console.error('Error fetching the blog post:', error);
       }
-    }
+    };
     fetchBlogByID();
 
     // Fetch comments for the blog post
-    const fetchBlogComments = async() =>{
-      try{
+    const fetchBlogComments = async () => {
+      try {
         const CommentDdata = await getBlogComments(postId);
-        setBlogData(prevData =>({
+        setBlogData(prevData => ({
           ...prevData,
           comments: CommentDdata,
         }));
-      }catch(error){
+      } catch (error) {
         console.error('Error fetching comments:', error);
       }
-    }
+    };
     fetchBlogComments();
   }, [postId]);
 
-  
   const handleLikeClick = () => {
-  // Need to hander isLiked or not.. 
-  // likes delet service is redy in the services.
+    // Need to hander isLiked or not.. 
+    // likes delet service is redy in the services.
   };
 
   const handleAddComment = async () => {
     if (newComment.trim() && userName.trim()) {
       try {
-        const fetchUpdatedComments = async() =>{
-        const updatedComments = await addCommentToBlog(postId, { comment: newComment, user_name: userName });
-        setBlogData(prevData => ({
-          ...prevData,
-          comments: updatedComments,
-        }));
-        setNewComment('');
-        setUserName('');
-      };
-      fetchUpdatedComments();
+        const fetchUpdatedComments = async () => {
+          const updatedComments = await addCommentToBlog(postId, { comment: newComment, user_name: userName });
+          setBlogData(prevData => ({
+            ...prevData,
+            comments: updatedComments,
+          }));
+          setNewComment('');
+          setUserName('');
+        };
+        fetchUpdatedComments();
       } catch (error) {
         console.error('Error adding comment:', error);
       }
@@ -81,19 +80,18 @@ const BlogDetails = () => {
   const handleSaveEditComment = async (id) => {
     if (editedText.trim()) {
       try {
-        const fetchUpdateEditedComments = async() =>{
-
-        await updateCommentOnBlog(postId, id, { comment: editedText });
-        setBlogData(prevData => ({
-          ...prevData,
-          comments: prevData.comments.map(comment =>
-            comment.id === id ? { ...comment, comment: editedText } : comment
-          ),
-        }));
-        setEditComment(null);
-        setEditedText('');
-      };
-      fetchUpdateEditedComments();
+        const fetchUpdateEditedComments = async () => {
+          await updateCommentOnBlog(postId, id, { comment: editedText });
+          setBlogData(prevData => ({
+            ...prevData,
+            comments: prevData.comments.map(comment =>
+              comment.id === id ? { ...comment, comment: editedText } : comment
+            ),
+          }));
+          setEditComment(null);
+          setEditedText('');
+        };
+        fetchUpdateEditedComments();
       } catch (error) {
         console.error('Error updating comment:', error);
       }
@@ -103,79 +101,81 @@ const BlogDetails = () => {
   const handleCommentIconClick = () => {
     commentSectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
   if (!blogData) {
-    return <Loader/>;
+    return <Loader />;
   }
+
   return (
-      <>
-    <BlogContainer>
-      <BlogImageContainer>
-      <BlogImage src={blogData.image_url} alt="Blog" />
-      </BlogImageContainer>
-      <BlogTitle>{blogData.title}</BlogTitle>
-      <BlogSubTitle>{blogData.title}</BlogSubTitle>
-      <BlogMeta>
-        <BlogIcons>
-        <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: isLiked ? 'red' : 'white' }}>
-  <GoHeartFill/>
-</div>
-          <div onClick={handleCommentIconClick} style={{ cursor: 'pointer' }}>
-            <AiOutlineComment /> {blogData.comments?.length || 0}
-          </div>
-        </BlogIcons>
-        <div className='text-white-50 fs-5'>Published on - {new Date(blogData.date).toLocaleDateString()}</div>
-      </BlogMeta>
-      <BlogDescription>{blogData.content}</BlogDescription>
-      <CommentSection ref={commentSectionRef}>
-  <h2 style={{fontFamily: '"Edu TAS Beginner", cursive'}}>Comments</h2>
-  <CommentList>
-    {blogData.comments?.map(comment => (
-      <CommentItem key={comment.id}>
-        {editComment === comment.id ? (
-          <EditComment>
+    <>
+      <BlogContainer>
+        <BlogImageContainer>
+          <BlogImage src={blogData.image_url} alt="Blog" />
+        </BlogImageContainer>
+        <BlogTitle>{blogData.title}</BlogTitle>
+        <BlogSubTitle>{blogData.subtitle}</BlogSubTitle>
+        <BlogMeta>
+          <BlogIcons>
+            <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: isLiked ? 'red' : 'white' }}>
+              <GoHeartFill />
+            </div>
+            <div onClick={handleCommentIconClick} style={{ cursor: 'pointer' }}>
+              <AiOutlineComment /> {blogData.comments?.length || 0}
+            </div>
+          </BlogIcons>
+          <div className='text-white-50 fs-5'>Published on - {new Date(blogData.date).toLocaleDateString()}</div>
+        </BlogMeta>
+        <BlogDescription dangerouslySetInnerHTML={{ __html: blogData.content }} />
+        <CommentSection ref={commentSectionRef}>
+          <h2 style={{ fontFamily: '"Edu TAS Beginner", cursive' }}>Comments</h2>
+          <CommentList>
+            {blogData.comments?.map(comment => (
+              <CommentItem key={comment.id}>
+                {editComment === comment.id ? (
+                  <EditComment>
+                    <input
+                      className='text-light'
+                      type="text"
+                      value={editedText}
+                      onChange={(e) => setEditedText(e.target.value)}
+                    />
+                    <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
+                  </EditComment>
+                ) : (
+                  <>
+                    <p>{comment.comment}</p>
+                    <CommentAuthor>{comment.user_name}</CommentAuthor>
+                    <Gap></Gap>
+                    <BiSolidMessageRoundedEdit
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => handleEditComment(comment.id, comment.comment)}
+                    />
+                  </>
+                )}
+              </CommentItem>
+            ))}
+          </CommentList>
+          <CommentInput>
             <input
               className='text-light'
               type="text"
-              value={editedText}
-              onChange={(e) => setEditedText(e.target.value)}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              placeholder="Your name"
+              required
             />
-            <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
-          </EditComment>
-        ) : (
-          <>
-            <p>{comment.comment}</p>
-            <CommentAuthor>{comment.user_name}</CommentAuthor>
-            <Gap></Gap>
-            <BiSolidMessageRoundedEdit
-              style={{ cursor: 'pointer' }}
-              onClick={() => handleEditComment(comment.id, comment.comment)}
+            <input
+              className='text-light'
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment"
+              required
             />
-          </>
-        )}
-      </CommentItem>
-    ))}
-  </CommentList>
-  <CommentInput>
-    <input
-      className='text-light'
-      type="text"
-      value={userName}
-      onChange={(e) => setUserName(e.target.value)}
-      placeholder="Your name"
-      required
-    />
-    <input
-    className='text-light'
-      type="text"
-      value={newComment}
-      onChange={(e) => setNewComment(e.target.value)}
-      placeholder="Add a comment"
-      required
-    />
-    <button onClick={handleAddComment}>Post Comment</button>
-  </CommentInput>
-</CommentSection>
-    </BlogContainer>
+            <button onClick={handleAddComment}>Post Comment</button>
+          </CommentInput>
+        </CommentSection>
+      </BlogContainer>
     </>
   );
 };
@@ -183,92 +183,89 @@ const BlogDetails = () => {
 export default BlogDetails;
 
 const BlogContainer = styled.div`
-  max-width: 1400px;
+  max-width: 1250px;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ddd;  
+  border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #1e1e1e; /* Darker background for better contrast */
+  color: #f5f5f5; /* Light text color for better readability */
 `;
 
 const BlogImageContainer = styled.div`
-  width: 70%;
-  border-radius: 10px 10px 0 0;
-  margin: 10px auto;
-  @media (max-width: 900px) {
-    width: 90%;
-  }
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
 `;
 
 const BlogImage = styled.img`
   width: 100%;
-  border-radius: 10px 10px 10px 10px;
+  max-height: 600px; /* Set a max height for better control */
+  object-fit: cover; /* Ensures the image covers the container without distortion */
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 20px; /* Add some space below the image */
 `;
 
 const BlogTitle = styled.h1`
-  margin-top: 20px;
+  font-size: 2.5em;
   text-align: center;
-  font-family: "Edu TAS Beginner", cursive;
-  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
+  color: #e0e0e0; /* Slightly lighter color for titles */
+  margin-bottom: 10px;
 `;
+
 const BlogSubTitle = styled.h4`
-  margin-top: 20px;
+  font-size: 1.5em;
   text-align: center;
-  font-family: "Edu TAS Beginner", cursive;
-  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
+  color: #b0b0b0; /* Slightly lighter color for subtitles */
+  margin-bottom: 20px;
 `;
 
 const BlogMeta = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
-  font-family: "Caveat", cursive;
-  color: aliceblue;
+  font-family: 'Roboto', sans-serif;
+  color: #b0b0b0;
+  margin-bottom: 20px;
 `;
 
 const BlogIcons = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: larger;
-`;
-
-const BlogDescription = styled.p`
-  margin-top: 20px;
+  gap: 15px;
   font-size: 1.2em;
-  line-height: 1.6;
-  font-family: "Sedan SC", serif;
-  color: aliceblue;
 `;
 
-
-// new styles
+const BlogDescription = styled.div`
+  font-size: 1.2em;
+  line-height: 1.8;
+  font-family: 'Roboto', sans-serif;
+  color: #f5f5f5;
+  margin-bottom: 20px;
+`;
 
 const CommentSection = styled.div`
-  margin: 20px;
-  color: aliceblue;
+  margin-top: 30px;
 `;
 
 const CommentList = styled.ul`
   list-style-type: none;
   padding: 0;
-  color: aliceblue;
+  margin: 0;
 `;
 
 const CommentItem = styled.li`
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  padding: 15px 0;
+  color: #e0e0e0;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  color: aliceblue;
-
-  p {
-    font-size: 0.9em; /* Smaller font for comments */
-    margin: 0;
-    flex-grow: 1;
-  }
+  flex-direction: column;
+  gap: 10px;
 `;
 
 const EditComment = styled.div`
@@ -278,84 +275,56 @@ const EditComment = styled.div`
   input {
     flex-grow: 1;
     margin-right: 10px;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background: transparent;
-    padding: 5px;
+    border: 1px solid #ddd;
+    padding: 8px;
+    color: #f5f5f5;
+    background: #2a2a2a;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
   }
 
   button {
-    background-color: #4CAF50; /* Green */
+    padding: 8px 12px;
     border: none;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
     border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 
-const CommentAuthor = styled.span`
-  font-size: 0.8em;
-  font-weight: lighter;
-  color: white;
-  display: block;
-  text-align: right;
-  margin-top: 5px;
-
-  &::before {
-    content: '~ ';
-  }
+const CommentAuthor = styled.div`
+  font-size: 0.9em;
+  color: #aaa;
 `;
 
 const CommentInput = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 0 auto;
-  margin-top: 20px;
-  background: rgba(45, 45, 45, 0.5);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  border-radius: 20px;
-  width: 75%;
+  gap: 15px;
 
   input {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    background: transparent;
     padding: 10px;
-    font-size: 1em;
-    transition: filter 0.3s ease;
-
-    &::placeholder {
-      color: gainsboro;
-    }
-
-    &:focus {
-      outline: none;
-    }
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background: #2a2a2a;
+    color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
   }
 
   button {
-    align-self: flex-end;
-    background-color: #008CBA; /* Blue */
-    border: none;
-    color: white;
+    align-self: flex-start;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
     border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
   }
 `;
 
 const Gap = styled.div`
-width: 20px;
-`
+  height: 30px;
+`;

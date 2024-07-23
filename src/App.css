@@ -7,13 +7,23 @@
   scroll-behavior: smooth;
 }
 
-body{
-  /* background: radial-gradient(circle, #ffe34d, #ff8e72, #ff9b6f, #ffe34d); */
-    /* box-shadow: 0 0 100px rgba(255, 220, 66, 0.9); */
-  background-color: #1a1a1a;
-  /* background: radial-gradient(circle, #FFC837, #00B4DB); */
-
+body {
+  background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10, 24, 30, 1) 100%);
+  animation: backgroundAnimation 15s infinite ease-in-out;
 }
+
+@keyframes backgroundAnimation {
+  0% {
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10, 24, 30, 1) 100%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(30, 40, 50, 1) 100%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(10, 24, 30, 1) 100%);
+  }
+}
+
 .sun {
   position: fixed;
   bottom: -100px;
@@ -30,7 +40,7 @@ body{
   background: radial-gradient(circle, #ffdd42, #ff7e5f);
   border-radius: 50%;
   box-shadow: 0 0 100px rgba(255, 220, 66, 0.9);
-  animation: Raypulse 10s ease-in-out infinite;
+  animation: Raypulse 15s ease-in-out infinite;
 }
 
 .sun-rays {
@@ -42,7 +52,7 @@ body{
   background: radial-gradient(circle, transparent 50%, rgba(255, 220, 66, 0.5) 75%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  animation: Raypulse 10s ease-in-out infinite;
+  animation: Raypulse 15s ease-in-out infinite;
   box-shadow: 0 0 120px rgba(255, 242, 0, 0.963);
 }
 
@@ -55,21 +65,17 @@ body{
   }
 }
 
-@keyframes pulse {
- 
-}
-
-.icon{
+.icon {
   font-size: 25px;
   color: gray;
   transition: transform .3s;
   margin: 0;
 }
-.icon:hover{
+
+.icon:hover {
   transform: scale(1.2);
   width: 26px;
-  height: 26;
+  height: 26px;
   color: white;
-  /* border-radius: 20px; */
   box-shadow: 0 0 13px lightblue;
 }

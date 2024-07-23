@@ -20,5 +20,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Gideon+Roman&display=swap');
 /*   font-family: "Anton SC", sans-serif;
   font-family: "Gideon Roman", serif;
-
  */
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Dancing+Script:wght@700&display=swap');
+ /* const BlogTitle = styled.h1`
+    font-family: 'Dancing Script', cursive;
+    color: #333;
+`;
+
+const BlogDescription = styled.div`
+    font-family: 'Roboto', sans-serif;
+    color: #555;
+`; */
