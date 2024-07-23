@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import Loader from '../components/profileComponents/Loader.jsx';
 import styled from 'styled-components';
-import ProjectCard from '../components/projectsComponents/ProjectCard';
-import {PiArrowFatLinesRightLight, PiArrowFatLinesLeftLight, FaSearch} from '../imports/Icons'
+import { PiArrowFatLinesRightLight, PiArrowFatLinesLeftLight, FaSearch } from '../imports/Icons';
 import { getProjects } from '../services/projectServices.js';
+
+// Lazy load the ProjectCard component
+const ProjectCard = lazy(() => import('../components/projectsComponents/ProjectCard'));
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -19,17 +21,14 @@ const Projects = () => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    // console.log(event.target.value);
   };
 
   const handleFilterChange = (event) => {
     setFilterCategory(event.target.value);
-    // console.log(event.target.value);
   };
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
-    // console.log(event.target.value);
   };
 
   const filteredProjects = projects.filter(project => {
@@ -39,7 +38,7 @@ const Projects = () => {
     );
   }).sort((a, b) => {
     if (sortOption === 'date') {
-      return new Date(b.date) - new Date(selectedProject.created_at).toLocaleDateString();
+      return new Date(b.date) - new Date(a.date);
     } else if (sortOption === 'a-z') {
       return a.title.localeCompare(b.title);
     }
@@ -81,7 +80,7 @@ const Projects = () => {
     <>
       <ProjectsPage>
         {loading ? (
-          <Loader></Loader>
+          <Loader />
         ) : error ? (
           <p className='text-secondary'>Error fetching project details: {error.message}</p>
         ) : (
@@ -93,7 +92,7 @@ const Projects = () => {
                   <h2>{selectedProject.title}</h2>
                   <h2>{selectedProject.subtitle}</h2>
                   <h6>{new Date(selectedProject.created_at).toLocaleDateString()}</h6>
-                  <p>{selectedProject.description}</p>
+                  <p dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
                 </ProjectInfo>
               </>
             )}
@@ -110,20 +109,21 @@ const Projects = () => {
                 showArrows={false}
               >
                 {projects.map(project => (
-                  <ProjectCard key={project.id} project={project} />
+                  <Suspense fallback={<Loader />} key={project.id}>
+                    <ProjectCard project={project} />
+                  </Suspense>
                 ))}
               </CustomCarousel>
               <CarouselArrows>
-                <button onClick={prevSlide}><PiArrowFatLinesLeftLight/></button>
-                
-                <button onClick={nextSlide}><PiArrowFatLinesRightLight/></button>
+                <button onClick={prevSlide}><PiArrowFatLinesLeftLight /></button>
+                <button onClick={nextSlide}><PiArrowFatLinesRightLight /></button>
               </CarouselArrows>
             </CarouselContainer>
           </>
         )}
-        
+
         <ProjectsList>
-        <FilterBar>
+          <FilterBar>
             <SearchInput>
               <FaSearch color="black" />
               <Input
@@ -147,16 +147,14 @@ const Projects = () => {
               <option value="a-z">A-Z</option>
             </Select>
           </FilterBar>
-            {filteredProjects.map(project => (
-              <ProjectItem key={project.id} to={`/projects/${project.id}`}>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectSubTitle>{project.subtitle}</ProjectSubTitle>
-                <p>{project.description.substring(0, 350)} <strong>Read More</strong></p>
-                <p>{project.cadegories}</p>
-                <small>Date Created: {new Date(project.created_at).toLocaleDateString()}</small>
-              </ProjectItem>
-            ))}
-          </ProjectsList>
+          {filteredProjects.map(project => (
+            <ProjectItem key={project.id} to={`/projects/${project.id}`}>
+              <ProjectTitle>{project.title}</ProjectTitle>
+              <ProjectSubTitle>{project.subtitle}</ProjectSubTitle>
+              <small>Date Created: {new Date(project.created_at).toLocaleDateString()}</small>
+            </ProjectItem>
+          ))}
+        </ProjectsList>
       </ProjectsPage>
     </>
   );
@@ -220,7 +218,6 @@ const CustomCarousel = styled(Carousel)`
 `;
 
 const CarouselArrows = styled.div`
-  
   display: flex;
   justify-content: center;
   justify-content: space-between;
@@ -232,9 +229,6 @@ const CarouselArrows = styled.div`
     cursor: pointer;
     margin: 0 10px;
     color: white;
-    &:hover{
-      
-    }
   }
 `;
 
@@ -297,6 +291,7 @@ const ProjectTitle = styled.h2`
   color: whitesmoke;
   text-shadow: 2px 2px 4px rgba(243, 203, 3, 0.2);
 `;
+
 const ProjectSubTitle = styled.h5`
   color: #ffeb99;
   text-shadow: 2px 2px 4px rgba(243, 203, 3, 0.2);

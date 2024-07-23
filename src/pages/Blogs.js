@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from '../components/profileComponents/Loader.jsx';
 import ErrorAlert from '../components/profileComponents/ErrorAlert.jsx';
 import { getAllBlogs } from '../services/blogService.js';
 import { FaSearch } from '../imports/Icons.js';
+
+// Lazy load BlogItem component
+const BlogItem = lazy(() => import('../components/blogsComponents/BlogItem.jsx'));
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -15,7 +18,6 @@ const Blogs = () => {
   const [sortOption, setSortOption] = useState('');
 
   useEffect(() => {
-
     const fetchBlogData = async () => {
       try {
         const blogsData = await getAllBlogs();
@@ -26,23 +28,20 @@ const Blogs = () => {
         setLoading(false);
         console.log("got error while fetching bloglist " + error);
       }
-    }
+    };
     fetchBlogData();
   }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    // console.log(event.target.value);
   };
 
   const handleFilterChange = (event) => {
     setFilterCategory(event.target.value);
-    // console.log(event.target.value);
   };
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
-    // console.log(event.target.value);
   };
 
   const filteredBlogs = blogs.filter(blog => {
@@ -90,18 +89,13 @@ const Blogs = () => {
       ) : error ? (
         <ErrorAlert error={error} />
       ) : (
-        <>
+        <Suspense fallback={<Loader />}>
           <BlogsList>
             {filteredBlogs.map(blog => (
-              <BlogItem key={blog.id} to={`/blogs/${blog.id}`}>
-                <BlogTitle>{blog.title}</BlogTitle>
-                <BlogSubTitle>{blog.subtitle}</BlogSubTitle>
-                <p>{blog.content.substring(0, 150)}...</p>
-                <small>Date Created: {new Date(blog.date).toLocaleDateString()}</small>
-              </BlogItem>
+              <BlogItem key={blog.id} blog={blog} />
             ))}
           </BlogsList>
-        </>
+        </Suspense>
       )}
     </BlogsPage>
   );
@@ -153,27 +147,4 @@ const Select = styled.select`
   padding: 10px;
   border-radius: 5px;
   border: none;
-`;
-
-const BlogItem = styled(Link)`
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #333;
-  color: white;
-  text-decoration: none;
-  &:hover {
-    background-color: #444;
-  }
-`;
-
-const BlogTitle = styled.h2`
-  font-family: "Anton SC", sans-serif;
-  color: whitesmoke;
-  text-shadow: 2px 2px 4px rgba(243, 203, 3, 0.2);
-`;
-
-const BlogSubTitle = styled.h5`
-  color: #ffeb99;
-  text-shadow: 2px 2px 4px rgba(243, 203, 3, 0.2);
 `;
