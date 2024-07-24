@@ -92,7 +92,7 @@ const Projects = () => {
                   <h2>{selectedProject.title}</h2>
                   <h2>{selectedProject.subtitle}</h2>
                   <h6>{new Date(selectedProject.created_at).toLocaleDateString()}</h6>
-                  <p dangerouslySetInnerHTML={{ __html: selectedProject.description }} />
+                  <p>{selectedProject.description}</p>
                 </ProjectInfo>
               </>
             )}
@@ -193,6 +193,7 @@ const ProjectInfo = styled.div`
   padding: 20px;
   border-radius: 10px;
   margin: 20px;
+  font-family: 'Shantell Sans', cursive;
 
   @media (max-width: 768px) {
     width: 90%;

@@ -127,54 +127,55 @@ const BlogDetails = () => {
         </BlogMeta>
         <BlogDescription dangerouslySetInnerHTML={{ __html: blogData.content }} />
         <CommentSection ref={commentSectionRef}>
-          <h2 style={{ fontFamily: '"Edu TAS Beginner", cursive' }}>Comments</h2>
-          <CommentList>
-            {blogData.comments?.map(comment => (
-              <CommentItem key={comment.id}>
-                {editComment === comment.id ? (
-                  <EditComment>
-                    <input
-                      className='text-light'
-                      type="text"
-                      value={editedText}
-                      onChange={(e) => setEditedText(e.target.value)}
-                    />
-                    <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
-                  </EditComment>
-                ) : (
-                  <>
-                    <p>{comment.comment}</p>
-                    <CommentAuthor>{comment.user_name}</CommentAuthor>
-                    <Gap></Gap>
-                    <BiSolidMessageRoundedEdit
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => handleEditComment(comment.id, comment.comment)}
-                    />
-                  </>
-                )}
-              </CommentItem>
-            ))}
-          </CommentList>
-          <CommentInput>
+  <h2 style={{ fontFamily: '"Edu TAS Beginner", cursive' }}>Comments</h2>
+  <CommentList>
+    {blogData.comments?.map(comment => (
+      <CommentItem key={comment.id}>
+        {editComment === comment.id ? (
+          <EditComment>
             <input
               className='text-light'
               type="text"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              placeholder="Your name"
-              required
+              value={editedText}
+              onChange={(e) => setEditedText(e.target.value)}
             />
-            <input
-              className='text-light'
-              type="text"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Add a comment"
-              required
-            />
-            <button onClick={handleAddComment}>Post Comment</button>
-          </CommentInput>
-        </CommentSection>
+            <button onClick={() => handleSaveEditComment(comment.id)}>Save</button>
+          </EditComment>
+        ) : (
+          <>
+            <CommentText>{comment.comment}</CommentText>
+            <CommentActions>
+              <CommentAuthor>{comment.user_name}</CommentAuthor>
+              <BiSolidMessageRoundedEdit
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleEditComment(comment.id, comment.comment)}
+              />
+            </CommentActions>
+          </>
+        )}
+      </CommentItem>
+    ))}
+  </CommentList>
+  <CommentInput>
+    <input
+      className='text-light'
+      type="text"
+      value={userName}
+      onChange={(e) => setUserName(e.target.value)}
+      placeholder="Your name"
+      required
+    />
+    <input
+      className='text-light'
+      type="text"
+      value={newComment}
+      onChange={(e) => setNewComment(e.target.value)}
+      placeholder="Add a comment"
+      required
+    />
+    <button onClick={handleAddComment}>Post Comment</button>
+  </CommentInput>
+</CommentSection>
       </BlogContainer>
     </>
   );
@@ -186,7 +187,7 @@ const BlogContainer = styled.div`
   max-width: 1250px;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #1e1e1e; /* Darker background for better contrast */
@@ -244,7 +245,7 @@ const BlogIcons = styled.div`
 const BlogDescription = styled.div`
   font-size: 1.2em;
   line-height: 1.8;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Gideon Roman', serif;
   color: #f5f5f5;
   margin-bottom: 20px;
 `;
@@ -266,6 +267,10 @@ const CommentItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const EditComment = styled.div`
@@ -294,9 +299,23 @@ const EditComment = styled.div`
   }
 `;
 
+const CommentText = styled.p`
+  flex-grow: 1;
+  margin: 0;
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+`;
+
+const CommentActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 const CommentAuthor = styled.div`
   font-size: 0.9em;
   color: #aaa;
+  font-family: 'Roboto', sans-serif;
 `;
 
 const CommentInput = styled.div`

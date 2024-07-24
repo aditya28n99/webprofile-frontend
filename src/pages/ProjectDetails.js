@@ -50,16 +50,7 @@ const ProjectDetails = () => {
         </ProjectImageContainer>
       <ProjectTitle>{project.title}</ProjectTitle>
       <ProjectSubTitle>{project.subtitle}</ProjectSubTitle>
-      <ProjectDescription>{project.description}</ProjectDescription>
-      <p className='text-light'><strong>Technologies:</strong> {project.technologies}</p>
-      <div className="list-group">
-        {project.github_link && (
-          <a className='link-warning text-decoration-none list-group-item-action active' href={project.github_link} target="_blank" rel="noopener noreferrer">GitHub</a>
-        )}
-        {project.live_link && (
-          <a className='link-warning text-decoration-none list-group-item-action active' href={project.live_link} target="_blank" rel="noopener noreferrer">Live Demo</a>
-        )}
-      </div>
+      <ProjectHtml dangerouslySetInnerHTML={{ __html: project.html_content }}></ProjectHtml>
     </ProjectDetailsPage>
     </>
   );
@@ -71,13 +62,13 @@ const ProjectDetailsPage = styled.div`
   max-width: 90%;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ddd;  
+  /* border: 1px solid #ddd;   */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   `;
 
 const ProjectImageContainer = styled.div`
-  width: 70%;
+  width: 80%;
   border-radius: 10px 10px 0 0;
   margin: 10px auto;
   @media (max-width: 900px) {
@@ -89,20 +80,22 @@ const ProjectTitle = styled.h1`
   margin-top: 20px;
   text-align: center;
   font-family: "Edu TAS Beginner", cursive;
+  font-family: 'Gideon Roman', serif;
   color: aliceblue;
 `;
 
 const ProjectSubTitle = styled.h4`
   margin-top: 20px;
   text-align: center;
-  font-family: "Edu TAS Beginner", cursive;
+  font-family: "Sedan SC", serif;
   color: aliceblue;
 `;
 
-const ProjectDescription = styled.p`
+const ProjectHtml = styled.p`
   margin: 20px;
   font-size: 1.2em;
   line-height: 1.6;
-  font-family: "Sedan SC", serif;
+  font-family: 'Shantell Sans', cursive;
+
   color: aliceblue;
 `;
