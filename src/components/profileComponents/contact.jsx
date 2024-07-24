@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaDownload, FaReact, FaNodeJs, FaDatabase } from 'react-icons/fa';
 import { SiStyledcomponents, SiFlutter, SiReact, SiTailwindcss } from 'react-icons/si';
+import cv from '../../imports/Aditya Wakale Professional CV Resume.pdf';
 
 const FormContainer = styled(Container)`
   display: flex;
@@ -185,7 +186,7 @@ function ContactForm() {
         <ResumeSection>
           <h2>Downloadable Resume</h2>
           <p>Get a detailed overview of my professional experience and skills.</p>
-          <StyledButton href="/path-to-your-resume.pdf" download>
+          <StyledButton href={cv} download>
             <FaDownload /> Download Resume
           </StyledButton>
         </ResumeSection>
