@@ -1,7 +1,9 @@
 import React from 'react';
 import { styled, keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import tcs from '../../images/Certifications/Aditya_Wakale_Tcs_Certificate of Achivement._page-0001.jpg'
+import reactjs from '../../images/Certifications/Aditya__Wakale_achivement_ReactJS_Certification_10505_Qr_code_.png'
+import webdev from '../../images/Certifications/Aditya_Wakale_excellence_Web_Dev_Fundamentals_Certification..png'
 export default function Intro() {
   return (
     <>
@@ -17,10 +19,13 @@ export default function Intro() {
         <IconCards >
           <IconCardsContent >
             <IconCardsItem >
-              <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya_Wakale_excellence_Web_Dev_Fundamentals_Certification_10171_Qr_code___.png" alt="Cert-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={webdev} alt="Cert-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </IconCardsItem>
             <IconCardsItem >
-              <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_ReactJS_Certification_10505_Qr_code_.png" alt="Cert-2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={tcs} alt="Cert-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </IconCardsItem>
+            <IconCardsItem >
+              <img src={reactjs} alt="Cert-2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </IconCardsItem>
             <IconCardsItem>
               <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_Job_Focussed_Professional_Communication_Certification_16679_Qr_code_.png" alt="Cert-3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
