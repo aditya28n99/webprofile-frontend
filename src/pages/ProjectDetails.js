@@ -65,6 +65,11 @@ const ProjectDetailsPage = styled.div`
   /* border: 1px solid #ddd;   */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px 0 5px 0;  
+  }
   `;
 
 const ProjectImageContainer = styled.div`
@@ -77,6 +82,7 @@ const ProjectImageContainer = styled.div`
 `;
 
 const ProjectTitle = styled.h1`
+  margin: 0;
   margin-top: 20px;
   text-align: center;
   font-family: "Edu TAS Beginner", cursive;
@@ -85,6 +91,7 @@ const ProjectTitle = styled.h1`
 `;
 
 const ProjectSubTitle = styled.h4`
+ margin: 0;
   margin-top: 20px;
   text-align: center;
   font-family: "Sedan SC", serif;
@@ -98,4 +105,7 @@ const ProjectHtml = styled.p`
   font-family: 'Shantell Sans', cursive;
 
   color: aliceblue;
+  @media (max-width: 768px) {
+    margin: 10px auto;
+  }
 `;
