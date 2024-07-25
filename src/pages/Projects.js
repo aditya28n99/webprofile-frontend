@@ -172,6 +172,8 @@ const ProjectsPage = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    padding: 20px 0 5px 0;
+    margin: 0 5px;
   }
 `;
 
@@ -192,9 +194,8 @@ const ProjectInfo = styled.div`
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
-  margin: 20px;
+  margin: 0 20px;
   font-family: 'Shantell Sans', cursive;
-
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -207,6 +208,7 @@ const CarouselContainer = styled.div`
   position: relative;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
+  color: whitesmoke;
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -249,6 +251,7 @@ const FilterBar = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   justify-self: left;
+  box-shadow: 0 0 10px solid black;
 `;
 
 const SearchInput = styled.div`
