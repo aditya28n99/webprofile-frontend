@@ -1,24 +1,37 @@
-import { useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
 
-function ErrorAlert({error}) {
-  const [show, setShow] = useState(true);
+function ErrorAlert({ error }) {
+  let errorMessage = 'An unexpected error occurred';
 
-  // If error is an object, extract the message property
-  const errorMessage = error && typeof error === 'object' ? error.message : error;
-
-  if (show) {
-    return (
-      <Alert variant="danger" dismissible>
-        <Alert.Heading>Oh snap! You got an {errorMessage}!!</Alert.Heading>
-        <p>
-          Please Try Again!!
-        </p>
-      </Alert>
-    );
+  // Check if error is an object and extract the message
+  if (error && typeof error === 'object') {
+    errorMessage = error.message || 'An unexpected error occurred';
+  } else if (typeof error === 'string') {
+    errorMessage = error;
   }
-  
+
+  // Customize messages based on different types of errors
+  const getErrorMessage = () => {
+    switch (errorMessage) {
+      case 'Network Error':
+        return 'It looks like there was a problem with your network connection.';
+      case '404':
+        return 'The requested resource could not be found.';
+      case '500':
+        return 'There was an internal server error.';
+      default:
+        return 'An unexpected error occurred. Please try again later.';
+    }
+  };
+
+  return (
+    <Alert variant="danger" dismissible>
+      <Alert.Heading>Oh snap! {getErrorMessage()}</Alert.Heading>
+      <p>
+        Please try again or contact support if the issue persists.
+      </p>
+    </Alert>
+  );
 }
 
 export default ErrorAlert;
