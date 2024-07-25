@@ -12,11 +12,14 @@ const FormContainer = styled(Container)`
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 20px;
-  background-color: #282c34;
+  /* background-color: #282c34; */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
   color: #ffffff;
+  @media (max-width: 768px) {
+    padding: 10px 5px;
+  }
 `;
 
 const Section = styled.div`
@@ -58,13 +61,19 @@ function ContactForm() {
   const [formType, setFormType] = useState('Hiring');
   const formRef = useRef();
 
+  const serviceID = process.env.REACT_APP_SERVICE_ID;
+  const hiringTempID = process.env.REACT_APP_HIRING_TEMP_ID;
+  const collabTempID = process.env.REACT_APP_COLLAB_TEMP_ID;
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+
   const sendEmail = (e) => {
     e.preventDefault();
 
-    const serviceId = formType === 'Hiring' ? 'service_43dcufl' : 'service_43dcufl';
-    const templateId = formType === 'Hiring' ? 'template_66pdykl' : 'template_okyy8e9';
+    const serviceId = formType === 'Hiring' ? serviceID : serviceID;
+    const templateId = formType === 'Hiring' ? hiringTempID : collabTempID;
 
-    emailjs.sendForm(serviceId, templateId, formRef.current, 'At5r9QyxKu1MAIlqB')
+    emailjs.sendForm(serviceId, templateId, formRef.current, apiKey)
       .then((result) => {
         alert("Thank you for your message.");
         clearData();
@@ -90,7 +99,7 @@ function ContactForm() {
           <h1>Let's Chat.</h1>
           <h1>Tell me about your projects.</h1>
           <p className='my-4'>Let's create something together. I enjoy working with dedicated creatives.</p>
-          <h6>You can also contact on <Link to='mailto:adityawakale208@gmail.com' className='mx-2'>{' '}adityawakale208@gmail.com</Link></h6>
+  <h6>You can also contact on <Link to='mailto:adityawakale208@gmail.com' className='text-warning mx-2' >{' '}adityawakale208@gmail.com</Link></h6>
         </div>
         <div className='form-bg'>
           <Form ref={formRef} onSubmit={sendEmail}>
