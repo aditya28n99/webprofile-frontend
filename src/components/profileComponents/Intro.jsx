@@ -9,29 +9,28 @@ export default function Intro() {
         <IntroContent>
           <Name>Hello, I'm Aditya Wakale</Name>
           <Designation>Passionate MERN Stack Developer</Designation>
-          <IntroPara>Welcome to my digital playground where I bring ideas to life! <br/>Turning visions into reality through code and creativity.</IntroPara>
+          <IntroPara>Welcome to my digital playground where I bring ideas to life! <br />Turning visions into reality through code and creativity.</IntroPara>
           <StyledButton>
             <StyledLink to="/projects">View My Work</StyledLink>
           </StyledButton>
         </IntroContent>
         <IconCards >
-      <IconCardsContent >
-        <IconCardsItem >
-          <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya_Wakale_excellence_Web_Dev_Fundamentals_Certification_10171_Qr_code___.png" alt="Cert-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </IconCardsItem>
-        <IconCardsItem >
-          <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_ReactJS_Certification_10505_Qr_code_.png" alt="Cert-2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </IconCardsItem>
-        <IconCardsItem>
-         <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_Job_Focussed_Professional_Communication_Certification_16679_Qr_code_.png" alt="Cert-3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-        </IconCardsItem>
-      </IconCardsContent>
-    </IconCards>
+          <IconCardsContent >
+            <IconCardsItem >
+              <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya_Wakale_excellence_Web_Dev_Fundamentals_Certification_10171_Qr_code___.png" alt="Cert-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </IconCardsItem>
+            <IconCardsItem >
+              <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_ReactJS_Certification_10505_Qr_code_.png" alt="Cert-2" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </IconCardsItem>
+            <IconCardsItem>
+              <img src="https://edyodalms.s3.amazonaws.com/files/certificates/Aditya__Wakale_achivement_Job_Focussed_Professional_Communication_Certification_16679_Qr_code_.png" alt="Cert-3" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </IconCardsItem>
+          </IconCardsContent>
+        </IconCards>
       </IntroWrapper>
     </>
   );
 }
-
 
 const IntroWrapper = styled.div`
   display: flex;
@@ -44,13 +43,15 @@ const IntroWrapper = styled.div`
 const IntroContent = styled.div`
   flex: 1 1 50%;
   max-width: 600px;
-  padding: 20px;
+  padding: 0 20px;
+  margin: 0;
   margin-top: 20px;
   color: #fff;
   border-radius: 10px;
   @media (max-width: 768px) {
     flex: 1 100%;
-    margin: 20px 0;
+    margin: 0;
+    margin-top: 20px;
   }
 `;
 
@@ -108,9 +109,14 @@ position: relative;
 width: 100%;
 max-width: 380px;
 height: 250px;
-margin: 70px auto;
 color: white;
 perspective: 1000px;
+margin: 50px auto 20px auto;
+
+
+@media (max-width: 768px) {
+  margin: 10px auto 20px auto;
+  }
 `;
 
 const IconCardsContent = styled.div`
@@ -133,24 +139,24 @@ width: 100%;
 height: 100%;
 max-width: 380px;
 max-height: 250px;
-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 border-radius: 10px;
 overflow: hidden;
 transform-origin: center;
 transition: transform 0.5s ease;
 
 &:nth-child(1) {
-  background: #4ffdf1;
+  background: gray;
   transform: rotateY(0) translateZ(35vw);
 }
 
 &:nth-child(2) {
-  background: #ff4fdc;
+  background: gray;
   transform: rotateY(120deg) translateZ(35vw);
 }
 
 &:nth-child(3) {
-  background: #4d4fff;
+  background: gray;
   transform: rotateY(240deg) translateZ(35vw);
 }
 
