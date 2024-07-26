@@ -1,5 +1,4 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Loader from '../components/profileComponents/Loader.jsx';
 import ErrorAlert from '../components/profileComponents/ErrorAlert.jsx';

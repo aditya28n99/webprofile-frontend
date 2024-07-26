@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AiOutlineComment, BiSolidMessageRoundedEdit, GoHeartFill } from '../imports/Icons';
 import '../imports/fonts.css';
 import Loader from '../components/profileComponents/Loader';
-import { deletBlogLikes, getBlogById, getBlogComments, addCommentToBlog, updateCommentOnBlog } from '../services/blogService';
+import { getBlogById, getBlogComments, addCommentToBlog, updateCommentOnBlog } from '../services/blogService';
 
 const BlogDetails = () => {
   const { postId } = useParams();
@@ -18,8 +18,9 @@ const BlogDetails = () => {
   const [editedText, setEditedText] = useState('');
   const commentSectionRef = useRef(null);
 
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCounts, setLikeCounts] = useState(0);
+  //will work on it using redux.. 
+  // const [isLiked, setIsLiked] = useState(false);
+  // const [likeCounts, setLikeCounts] = useState(0);
 
   useEffect(() => {
     // Fetch blog post and comments from the server
@@ -48,10 +49,10 @@ const BlogDetails = () => {
     fetchBlogComments();
   }, [postId]);
 
-  const handleLikeClick = () => {
-    // Need to hander isLiked or not.. 
-    // likes delet service is redy in the services.
-  };
+  // const handleLikeClick = () => {
+  //   // Need to hander isLiked or not.. 
+  //   // likes delet service is redy in the services.
+  // };
 
   const handleAddComment = async () => {
     if (newComment.trim() && userName.trim()) {
@@ -116,7 +117,8 @@ const BlogDetails = () => {
         <BlogSubTitle>{blogData.subtitle}</BlogSubTitle>
         <BlogMeta>
           <BlogIcons>
-            <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: isLiked ? 'red' : 'white' }}>
+            {/* <div onClick={handleLikeClick} style={{ cursor: 'pointer', color: isLiked ? 'red' : 'white' }}> */}
+            <div>
               <GoHeartFill />
             </div>
             <div onClick={handleCommentIconClick} style={{ cursor: 'pointer' }}>
@@ -344,6 +346,6 @@ const CommentInput = styled.div`
   }
 `;
 
-const Gap = styled.div`
-  height: 30px;
-`;
+// const Gap = styled.div`
+//   height: 30px;
+// `;
