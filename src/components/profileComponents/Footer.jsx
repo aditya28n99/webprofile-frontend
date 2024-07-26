@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
+
 
 const FooterContainer = styled.footer`
   background: rgba(0, 0, 0, 0.2);
@@ -36,16 +38,16 @@ function Footer() {
   return (
     <FooterContainer>
       <SocialLinks>
-        <SocialLink href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+        <SocialLink href="https://www.facebook.com/people/Aditya-Wakale/pfbid02VCevat2TMfYFuQvuTJxqpzqJquM23WxvNH9QHfagvzwqgC4DLsoHsoeD11LrLb3kl/" target="_blank" rel="noopener noreferrer">
           <FaFacebook />
         </SocialLink>
-        <SocialLink href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <FaTwitter />
+        <SocialLink href="https://x.com/itzzz_ad" target="_blank" rel="noopener noreferrer">
+          <FaXTwitter />
         </SocialLink>
-        <SocialLink href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+        <SocialLink href="https://www.instagram.com/swam_fire/?next=%2F" target="_blank" rel="noopener noreferrer">
           <FaInstagram />
         </SocialLink>
-        <SocialLink href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+        <SocialLink href="https://www.linkedin.com/in/aditya-wakale-959368248" target="_blank" rel="noopener noreferrer">
           <FaLinkedin />
         </SocialLink>
       </SocialLinks>
