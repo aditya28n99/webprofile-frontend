@@ -5,6 +5,7 @@ import Loader from '../components/profileComponents/Loader.jsx';
 import styled from 'styled-components';
 import { PiArrowFatLinesRightLight, PiArrowFatLinesLeftLight, FaSearch } from '../imports/Icons';
 import { getProjects } from '../services/projectServices.js';
+import isPropValid from '@emotion/is-prop-valid';
 
 // Lazy load the ProjectCard component
 const ProjectCard = lazy(() => import('../components/projectsComponents/ProjectCard'));
@@ -177,7 +178,9 @@ const ProjectsPage = styled.div`
   }
 `;
 
-const Background = styled.div`
+const Background = styled.div.withConfig({
+  shouldForwardProp: (prop) => isPropValid(prop) && prop !== 'image'
+})`
   background-image: url(${props => props.image});
   filter: blur(8px);
   background-size: cover;
