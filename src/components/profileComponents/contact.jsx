@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaDownload, FaReact, FaNodeJs, FaDatabase } from 'react-icons/fa';
 import { SiStyledcomponents, SiFlutter, SiReact, SiTailwindcss } from 'react-icons/si';
-import cv from '../../imports/Aditya Wakale Professional CV Resume.pdf';
+import cv from '../../imports/Adi_Cv@Overleaf.pdf';
 
 const FormContainer = styled(Container)`
   display: flex;
