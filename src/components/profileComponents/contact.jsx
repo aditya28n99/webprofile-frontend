@@ -4,7 +4,9 @@ import emailjs from 'emailjs-com';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaDownload, FaReact, FaNodeJs, FaDatabase } from 'react-icons/fa';
-import { SiStyledcomponents, SiFlutter, SiReact, SiTailwindcss } from 'react-icons/si';
+import { RiNextjsFill } from "react-icons/ri";
+import { TbBrandZulip, TbBrandRedux } from "react-icons/tb";
+import { SiStyledcomponents, SiFlutter, SiReact, SiTailwindcss, SiZod } from 'react-icons/si';
 import cv from '../../imports/Ad_Resume@overleaf.pdf';
 
 const FormContainer = styled(Container)`
@@ -200,14 +202,18 @@ function ContactForm() {
           </StyledButton>
         </ResumeSection>
         <SkillToolSection>
-          <SkillTool><FaReact /> React</SkillTool>
+          <SkillTool><FaReact /> React.js</SkillTool>
+          <SkillTool><RiNextjsFill /> Next.js</SkillTool>
           <SkillTool><FaNodeJs /> Node.js</SkillTool>
+          <SkillTool><TbBrandZulip /> ZusStand</SkillTool>
+          <SkillTool><SiZod /> Zod</SkillTool>
+          <SkillTool><TbBrandRedux /> Redux</SkillTool>
+          <SkillTool><SiTailwindcss /> Tailwind</SkillTool>
           <SkillTool><FaDatabase /> MySQL</SkillTool>
           <SkillTool><FaDatabase /> MongoDB</SkillTool>
-          <SkillTool><SiStyledcomponents /> styledcomponents</SkillTool>
+          <SkillTool><SiStyledcomponents /> Styled Components</SkillTool>
           <SkillTool><SiFlutter /> Flutter</SkillTool>
           <SkillTool><SiReact /> Native</SkillTool>
-          <SkillTool><SiTailwindcss /> Tailwind</SkillTool>
         </SkillToolSection>
       </Section>
     </FormContainer>

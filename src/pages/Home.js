@@ -21,13 +21,11 @@ const Wrapper = styled.div`
 `;
 export default function Home() {
   return (
-    <>
     <Wrapper>
     <Intro></Intro>
     <BlogCarousel></BlogCarousel>
     <About></About>
     <Contact></Contact>
     </Wrapper>
-    </>
   )
 }

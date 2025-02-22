@@ -6,11 +6,10 @@ import reactjs from '../../images/Certifications/Aditya__Wakale_achivement_React
 import webdev from '../../images/Certifications/Aditya_Wakale_excellence_Web_Dev_Fundamentals_Certification..png'
 export default function Intro() {
   return (
-    <>
       <IntroWrapper>
         <IntroContent>
           <Name>Hello, I'm Aditya Wakale</Name>
-          <Designation>Passionate MERN Stack Developer</Designation>
+          <Designation>Passionate Software Developer</Designation>
           <IntroPara>Welcome to my digital playground where I bring ideas to life! <br />Turning visions into reality through code and creativity.</IntroPara>
           <StyledButton>
             <StyledLink to="/projects">View My Work</StyledLink>
@@ -33,7 +32,6 @@ export default function Intro() {
           </IconCardsContent>
         </IconCards>
       </IntroWrapper>
-    </>
   );
 }
 
