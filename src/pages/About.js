@@ -54,13 +54,16 @@ const About = () => (
     <Title>About Me</Title>
     <Paragraph>
       Hello there! <br />
-      I graduated with Distinction in Mechanical Engineering from Savitribai Phule Pune University. My journey into the tech world began during my engineering studies, and I’ve since transitioned into Full Stack Web Development. Currently, I’m refining my expertise in the MERN stack and other modern technologies through intensive training at EDYODA Software Training Institute in Bengaluru. Over the course of numerous projects, I’ve developed a strong proficiency in crafting dynamic, high-quality web applications.
+      I graduated with Distinction in Mechanical Engineering from Savitribai Phule Pune University. My passion for technology led me to transition into Full Stack Web Development, where I have gained expertise in building scalable and high-performing applications. Over time, I have worked with <strong className='text-yellow'>React.js, Next.js, Node.js, TypeScript, JavaScript, Zod, ZuStand, Tailwind, MIUI, Electron.js, and Flutter</strong> to create dynamic and efficient web, mobile and desktop applications.
     </Paragraph>
     <Paragraph>
-      Alongside my technical training, I actively document my projects and technical experiences on my blog. I aim to share insights, tutorials, and practical advice to inspire and assist others in the tech community. My blog serves as a platform to showcase my work, provide value to fellow developers, and contribute to the ever-evolving field of web development.
+      Currently, I am working as a Jr. Software Developer at <strong className='text-blue'>Aventisia</strong>, where I focus on building robust software solutions. Previously, I completed a Software Developer Internship at <strong className='text-blue'>Engineer's Cradle</strong>, where I contributed to a reusable UI component library using <strong className='text-yellow'>Next.js, TypeScript, and Storybook</strong>. I also worked as a <strong className='text-blue'>Freelance Developer at 560mTEK</strong>, handling multiple client projects, including web platforms, mobile applications, and desktop software.
     </Paragraph>
     <Paragraph>
-      On a personal note, I come from a family of four and have a range of interests outside of technology. I enjoy sketching as a creative outlet, play chess to enhance my strategic thinking, and unwind with video games. Staying active is important to me, so I regularly participate in outdoor sports like volleyball and tennis, which help me maintain a balanced and energetic lifestyle.
+      My journey has been a blend of learning and practical implementation. I actively document my projects and technical experiences on my blog, sharing tutorials and insights to help fellow developers. My goal is to continue enhancing my skills and contribute to innovative tech solutions.
+    </Paragraph>
+    <Paragraph>
+      Outside of coding, I have a keen interest in sketching, playing chess, and engaging in outdoor sports like volleyball and tennis. I believe in maintaining a balance between work and personal growth, always striving to learn and evolve.
     </Paragraph>
 
     <Education />

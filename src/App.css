@@ -79,3 +79,10 @@ body {
   color: white;
   box-shadow: 0 0 13px lightblue;
 }
+
+.text-blue{
+  color: cornflowerblue;
+}
+.text-yellow{
+  color:#ffdd42
+}
